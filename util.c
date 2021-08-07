@@ -1,34 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/06 16:47:51 by jeonhyun          #+#    #+#             */
+/*   Updated: 2021/08/06 17:27:56 by jeonhyun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-
-void print_msg(t_philo *philo, int flag)
+void	print_msg(t_philo *philo, int flag)
 {
 	pthread_mutex_lock(philo->data->print);
 	if (flag == FORK && *(philo->data->death) == 0)
-		printf("[%ld] %d has taken a fork\n", get_time() - philo->data->start_time, philo->num);
+		printf("[%ld] %d has taken a fork\n",
+			get_time() - philo->data->start_time, philo->num);
 	else if (flag == EAT && *(philo->data->death) == 0)
-		printf("[%ld] %d is eating\n", get_time() - philo->data->start_time, philo->num);
+		printf("[%ld] %d is eating\n",
+			get_time() - philo->data->start_time, philo->num);
 	else if (flag == SLEEP && *(philo->data->death) == 0)
-		printf("[%ld] %d is sleeping\n", get_time() - philo->data->start_time, philo->num);
+		printf("[%ld] %d is sleeping\n",
+			get_time() - philo->data->start_time, philo->num);
 	else if (flag == THINK && *(philo->data->death) == 0)
-		printf("[%ld] %d is thinking\n", get_time() - philo->data->start_time, philo->num);
+		printf("[%ld] %d is thinking\n",
+			get_time() - philo->data->start_time, philo->num);
 	else if (flag == DIE && *(philo->data->death) == 1 && philo->my_death == 1)
-		printf("[%ld] %d died\n", get_time() - philo->data->start_time, philo->num);
+		printf("[%ld] %d died\n",
+			get_time() - philo->data->start_time, philo->num);
 	pthread_mutex_unlock(philo->data->print);
 }
 
-unsigned long get_time(void)
+unsigned long	get_time(void)
 {
 	struct timeval	tmp;
 	unsigned long	now;
-	
+
 	gettimeofday(&tmp, 0);
 	now = tmp.tv_sec * 1000;
 	now += tmp.tv_usec / 1000;
 	return (now);
 }
 
-int ft_atoi(const char *str)
+void	free_data(t_data *data, t_philo *philo)
+{
+	if (philo != 0)
+		free(philo);
+	if (data->death != 0)
+		free(data->death);
+	if (data->print != 0)
+		free(data->print);
+	if (data->fork != 0)
+		free(data->fork);
+}
+
+
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	rst;
@@ -53,16 +82,16 @@ int ft_atoi(const char *str)
 	return (rst * pmsign);
 }
 
-int ft_isdigit(char *s)
+int	ft_isdigit(char *s)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (s[i] != '\0')
-    {
-        if (s[i] < '0' || s[i] > '9')
-            return (0);
-            i++;
-    }
-    return (1);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }

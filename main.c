@@ -1,28 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/06 16:53:12 by jeonhyun          #+#    #+#             */
+/*   Updated: 2021/08/06 17:28:42 by jeonhyun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void free_data(t_data *data, t_philo *philo)
+int	main(int argc, char *argv[])
 {
-    if (philo != 0)
-        free(philo);
-    if (data->death != 0)
-        free(data->death);
-    if (data->print != 0)
-        free(data->print);
-    if (data->fork != 0)
-        free(data->fork);
-}
+	t_philo	*philo;
+	t_data	data;
 
-int main(int argc, char *argv[])
-{
-    t_philo *philo;
-    t_data data;
-    
-    if (check_input(argc, argv) != 0)
-        return (0);
-    if (malloc_data(argv, &data, &philo) != 0)
-        return (0);
-    init_data(argv, &data);
-    init_philo(&data, philo);
-    init_thread(&data, philo);
-    return (0);
+	if (check_input(argc, argv) != 0)
+		return (0);
+	if (malloc_data(argv, &data, &philo) != 0)
+		return (0);
+	init_data(argv, &data);
+	init_philo(&data, philo);
+	init_thread(&data, philo);
+	return (0);
 }
