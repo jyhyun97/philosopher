@@ -52,6 +52,8 @@ void	free_data(t_data *data, t_philo *philo)
 		free(data->death);
 	if (data->print != 0)
 		free(data->print);
+	if (data->eat != 0)
+		free(data->eat);
 	if (data->fork != 0)
 		free(data->fork);
 }

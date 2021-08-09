@@ -39,6 +39,7 @@ int	malloc_data(char *argv[], t_data *data, t_philo **philo)
 	*philo = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 	data->death = (int *)malloc(sizeof(int));
 	data->print = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	data->eat = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* ft_atoi(argv[1]));
 	if (*philo == 0 || data->death == 0 || data->print == 0 || data->fork == 0)
@@ -64,6 +65,7 @@ void	init_data(char *argv[], t_data *data)
 		data->must_eat_cnt = -1;
 	*(data->death) = 0;
 	pthread_mutex_init(data->print, 0);
+	pthread_mutex_init(data->eat, 0);
 	i = 0;
 	while (i < data->num_of_philo)
 	{
@@ -114,6 +116,7 @@ void	init_thread(t_data *data, t_philo *philo)
 		pthread_mutex_destroy(&(data->fork[i]));
 		i++;
 	}
+	pthread_mutex_destroy(data->eat);
 	pthread_mutex_destroy(data->print);
 	free_data(data, philo);
 }

@@ -34,6 +34,7 @@ typedef struct s_data
 	int				must_eat_cnt;
 	int				*death;
 	unsigned long	start_time;
+	pthread_mutex_t *eat;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*fork;
 }	t_data;
@@ -51,8 +52,6 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
-void			free_data(t_data *data, t_philo *philo);
-
 //init.c
 int				check_input(int argc, char *argv[]);
 int				malloc_data(char *argv[], t_data *data, t_philo **philo);
@@ -68,7 +67,13 @@ int				ft_atoi(const char *str);
 int				ft_isdigit(char *s);
 
 //run.c
+void			drop_the_fork(t_philo *philo);
 void			*run_thread(void *philo_tmp);
 void			*run_monitor(void *philo_tmp);
+
+//do.c
+int				do_eat(t_philo *philo);
+int				do_sleep(t_philo *philo);
+int				do_think(t_philo *philo);
 
 #endif
