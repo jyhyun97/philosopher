@@ -6,7 +6,7 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 17:02:29 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/08/06 17:28:22 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/08/10 01:04:28 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data
 	int				must_eat_cnt;
 	int				*death;
 	unsigned long	start_time;
-	pthread_mutex_t *eat;
+	pthread_mutex_t	*eat;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*fork;
 }	t_data;

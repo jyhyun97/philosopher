@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   do.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/10 01:01:00 by jeonhyun          #+#    #+#             */
+/*   Updated: 2021/08/10 01:02:44 by jeonhyun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
-int left_hand(t_philo *philo)
+int	left_hand(t_philo *philo)
 {
 	if (*(philo->data->death) == 0 && philo->num % 2 == 1)
 	{
@@ -26,7 +37,7 @@ int left_hand(t_philo *philo)
 	return (0);
 }
 
-int right_hand(t_philo *philo)
+int	right_hand(t_philo *philo)
 {
 	if (*(philo->data->death) == 0 && philo->num % 2 == 0)
 	{

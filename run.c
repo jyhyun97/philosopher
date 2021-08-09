@@ -6,13 +6,13 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:54:16 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/08/06 17:02:05 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/08/10 01:04:43 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void drop_the_fork(t_philo *philo)
+void	drop_the_fork(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -20,7 +20,7 @@ void drop_the_fork(t_philo *philo)
 
 int	main_loop(t_philo *philo)
 {
-	int eat_tmp;
+	int	eat_tmp;
 
 	while (*(philo->data->death) == 0)
 	{

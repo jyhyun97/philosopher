@@ -6,7 +6,7 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 16:47:51 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/08/06 17:27:56 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/08/10 01:04:55 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	free_data(t_data *data, t_philo *philo)
 	if (data->fork != 0)
 		free(data->fork);
 }
-
 
 int	ft_atoi(const char *str)
 {
