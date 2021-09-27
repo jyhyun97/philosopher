@@ -6,7 +6,7 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 22:41:31 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/09/27 23:13:41 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/09/27 23:26:34 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static int	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->eat);
 	philo->eat_count++;
 	philo->last_eat = get_time();
-	while ((int)(get_time() - philo->last_eat) < philo->data->time_to_eat)
+	while (*(philo->data->death) == 0
+		&& (int)(get_time() - philo->last_eat) < philo->data->time_to_eat)
 		usleep(500);
 	if (philo->eat_count == philo->data->must_eat_cnt)
 	{
@@ -97,7 +98,8 @@ void	*run_thread(void *philo_tmp)
 		if (print_msg(philo, SLEEP) == 1)
 			break ;
 		tmp_sleep = get_time();
-		while ((int)(get_time() - tmp_sleep) < philo->data->time_to_sleep)
+		while (*(philo->data->death) == 0
+			&& (int)(get_time() - tmp_sleep) < philo->data->time_to_sleep)
 			usleep(500);
 		if (print_msg(philo, THINK) == 1)
 			break ;
