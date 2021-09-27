@@ -37,17 +37,18 @@ void	*run_thread(void *philo_tmp)
         pthread_mutex_lock(&philo->eat);
         philo->eat_count++;
         philo->last_eat = get_time();
-        if (philo->eat_count == philo->data->must_eat_cnt)
-        {
-            pthread_mutex_unlock(&philo->eat);
-            pthread_mutex_unlock(philo->l_fork); //포크 놓기
-            pthread_mutex_unlock(philo->r_fork);
-            break;
-        }
         while (*(philo->data->death) == 0 && get_time()
             - philo->last_eat < (unsigned long)philo->data->time_to_eat)
         {
         }
+        if (philo->eat_count == philo->data->must_eat_cnt)
+        {
+            pthread_mutex_unlock(&philo->eat);
+            pthread_mutex_unlock(philo->l_fork);
+            pthread_mutex_unlock(philo->r_fork);
+            break;
+        }
+
         pthread_mutex_unlock(&philo->eat);
 
         pthread_mutex_unlock(philo->l_fork);//포크 놓기
@@ -56,20 +57,14 @@ void	*run_thread(void *philo_tmp)
         unsigned long sleep_tmp;//자기
         print_msg(philo, SLEEP);
         sleep_tmp = get_time();
-        while (*(philo->data->death) == 0 && get_time() - sleep_tmp < (unsigned long)philo->data->time_to_sleep)
+        while (*(philo->data->death) == 0 && get_time()
+            - sleep_tmp < (unsigned long)philo->data->time_to_sleep)
         {
         }
         print_msg(philo, THINK);//생각하기
-        usleep(100);
+        usleep(10);
     }
     return (0);
-    //짝수 재우기..
-    //while (1)
-    //포크 쥐기
-    //먹기
-    //포크 놓기
-    //자기
-    //생각하기
 }
 
 void	*run_monitor(void *philo_tmp)
@@ -94,5 +89,4 @@ void	*run_monitor(void *philo_tmp)
 	if (*(philo->data->death) == 1)
 		print_msg(philo, DIE);
 	return (0);
-    //eat 동시에 죽기 방지..
 }

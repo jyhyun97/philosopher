@@ -92,7 +92,7 @@ void	init_thread(t_data *data, t_philo *philo)
 		philo[i].last_eat = data->start_time;
 		pthread_create(&(philo[i].thread), 0, &run_thread, &(philo[i]));
 		pthread_create(&(philo[i].monitor), 0, &run_monitor, &(philo[i]));
-		usleep(100);
+		usleep(10);
 		i++;
 	}
 	i = 0;
