@@ -56,7 +56,6 @@ void			init_data(char *argv[], t_data *data);
 void			init_philo(t_data *data, t_philo *philo);
 void			init_thread(t_data *data, t_philo *philo);
 
-//run.c
 void	*run_thread(void *philo_tmp);
 void	*run_monitor(void *philo_tmp);
 

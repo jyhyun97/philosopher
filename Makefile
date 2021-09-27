@@ -3,7 +3,8 @@ NAME = philo
 SRCS = main.c\
 		init.c\
 		util.c\
-		run.c
+		run.c\
+		monitor.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
