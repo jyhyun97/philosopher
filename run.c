@@ -3,12 +3,12 @@
 void	*run_thread(void *philo_tmp)
 {
     t_philo *philo;
-
+    
     philo = philo_tmp;
 
     if (philo->l_fork == philo->r_fork)
     {
-        pthread_mutex_lock(philo->l_fork); //포크 집기
+        pthread_mutex_lock(philo->l_fork);
         print_msg(philo, FORK);
         while (*(philo->data->death) == 0)
         {
@@ -28,19 +28,16 @@ void	*run_thread(void *philo_tmp)
 	}
     while (*(philo->data->death) == 0)
     {
-        pthread_mutex_lock(philo->l_fork);//포크 집기
+        pthread_mutex_lock(philo->l_fork);
 		print_msg(philo, FORK);
         pthread_mutex_lock(philo->r_fork);
 		print_msg(philo, FORK);
 
-        print_msg(philo, EAT);//먹기
+        print_msg(philo, EAT);
         pthread_mutex_lock(&philo->eat);
         philo->eat_count++;
         philo->last_eat = get_time();
-        while (*(philo->data->death) == 0 && get_time()
-            - philo->last_eat < (unsigned long)philo->data->time_to_eat)
-        {
-        }
+        usleep(philo->data->time_to_eat * 1000);
         if (philo->eat_count == philo->data->must_eat_cnt)
         {
             pthread_mutex_unlock(&philo->eat);
@@ -50,18 +47,12 @@ void	*run_thread(void *philo_tmp)
         }
 
         pthread_mutex_unlock(&philo->eat);
-
-        pthread_mutex_unlock(philo->l_fork);//포크 놓기
+        pthread_mutex_unlock(philo->l_fork);
         pthread_mutex_unlock(philo->r_fork);
 
-        unsigned long sleep_tmp;//자기
         print_msg(philo, SLEEP);
-        sleep_tmp = get_time();
-        while (*(philo->data->death) == 0 && get_time()
-            - sleep_tmp < (unsigned long)philo->data->time_to_sleep)
-        {
-        }
-        print_msg(philo, THINK);//생각하기
+        usleep(philo->data->time_to_sleep * 1000);
+        print_msg(philo, THINK);
         usleep(10);
     }
     return (0);
