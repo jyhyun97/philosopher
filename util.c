@@ -1,6 +1,6 @@
 # include "philo.h"
 
-void	print_msg(t_philo *philo, int flag)
+int	print_msg(t_philo *philo, int flag)
 {
 	pthread_mutex_lock(philo->data->print);
 	if (flag == FORK && *(philo->data->death) == 0)
@@ -19,6 +19,10 @@ void	print_msg(t_philo *philo, int flag)
 		printf("%ld %d died\n",
 			get_time() - philo->data->start_time, philo->num);
 	pthread_mutex_unlock(philo->data->print);
+	if (*(philo->data->death) != 0)
+		return (1);
+	else
+		return (0);
 }
 
 unsigned long	get_time(void)

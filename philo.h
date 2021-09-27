@@ -43,7 +43,7 @@ typedef struct s_philo
 
 
 //util.c
-void			print_msg(t_philo *philo, int flag);
+int				print_msg(t_philo *philo, int flag);
 unsigned long	get_time(void);
 void			free_data(t_data *data, t_philo *philo);
 int				ft_atoi(const char *str);
