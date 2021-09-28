@@ -6,7 +6,7 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 22:38:32 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/09/27 22:39:31 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/09/28 14:02:32 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	*run_monitor(void *philo_tmp)
 			pthread_mutex_lock(&philo->eat);
 			*(philo->data->death) += 1;
 			philo->my_death = 1;
+			print_msg(philo, DIE);
 			pthread_mutex_unlock(&philo->eat);
 		}
 		usleep(100);
 	}
-	if (*(philo->data->death) == 1)
-		print_msg(philo, DIE);
 	return (0);
 }

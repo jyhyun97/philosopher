@@ -6,7 +6,7 @@
 /*   By: jeonhyun <jeonhyun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 22:41:31 by jeonhyun          #+#    #+#             */
-/*   Updated: 2021/09/27 23:26:34 by jeonhyun         ###   ########.fr       */
+/*   Updated: 2021/09/28 13:24:07 by jeonhyun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,15 @@ static int	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->eat);
 	philo->eat_count++;
 	philo->last_eat = get_time();
+	pthread_mutex_unlock(&philo->eat);
 	while (*(philo->data->death) == 0
 		&& (int)(get_time() - philo->last_eat) < philo->data->time_to_eat)
 		usleep(500);
 	if (philo->eat_count == philo->data->must_eat_cnt)
 	{
-		pthread_mutex_unlock(&philo->eat);
 		drop_the_fork(philo);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->eat);
 	drop_the_fork(philo);
 	return (0);
 }
